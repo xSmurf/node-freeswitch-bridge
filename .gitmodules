@@ -1,0 +1,9 @@
+[submodule "modules/node-hash"]
+	path = modules/node-hash
+	url = git://github.com/Marak/node_hash.git
+[submodule "modules/node-ldapsearch"]
+	path = modules/node-ldapsearch
+	url = git://github.com/xSmurf/node-ldapsearch.git
+[submodule "modules/ltx"]
+	path = modules/ltx
+	url = git://github.com/astro/ltx.git
