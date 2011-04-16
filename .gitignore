@@ -1,0 +1,9 @@
+var/db/*
+temp*
+*.tmproj
+.makefiles*
+configs/*.js
+build/*
+*.node
+.DS_Store
+._*

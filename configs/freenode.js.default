@@ -1,0 +1,27 @@
+var path	= require("path");
+
+exports.Config = {
+	version:		"0.0.1",
+	
+	responderDir:		"responders",
+	
+	color:			"green",
+	
+	colors:			{
+		commands:	"red",
+		modules:	"green",
+		configs:	"magenta",
+		success:	"green",
+		failure:	"red"
+	},
+	
+	init:	function(self)
+	{
+		if (this.debug === true) {
+		}
+		/*
+		if (("fields" in self.ldap) === true) {
+			self.ldap.users.replace(/(\?\*\?)/, self.ldap.fields.join(","));
+		}*/
+	}
+};
