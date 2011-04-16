@@ -7,3 +7,5 @@ build/*
 *.node
 .DS_Store
 ._*
+
+*.*~
