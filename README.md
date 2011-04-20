@@ -16,5 +16,5 @@ This is a bridge for integrating LDAP users into FreeSwitch. Unlike realtime Ast
 * VM Change Password support (will require additional support from node-ldapsearch)
 * LDAP Query cache to avoid hammering the ldap server (FreeSwitch can request user information many times in a single dialplan)
 
-Every original work included is licenced under Creative Commons BY-SH-NC
+Every original work included is licenced under Creative Commons BY-SH
 
