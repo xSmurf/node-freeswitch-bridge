@@ -2,7 +2,7 @@ var sys			= require("sys"),
 	util		= require("util"),
 	events		= require("events"),
 	colors		= require("colors"),
-	recurseDir	= require("./deps/recurseDir").recurseDir,
+	recurseDir	= require("./modules/recurseDir").recurseDir,
 	Configs		= require("./configs");
 
 var load	= function (Foulinks) {
@@ -34,10 +34,10 @@ var load	= function (Foulinks) {
 			sys.puts(("[ responders ] ." + filePath.replace(__dirname+"/"+Configs.responderDir, "").replace(/(\.js)$/, ""))[Configs.colors.responders]);
 		} catch (err) {
 			// Don't keep a cache of failed includes!
-			if (typeof process.mainModule.moduleCache[filePath] !== "undefined") {
+			/*if (typeof process.mainModule.moduleCache[filePath] !== "undefined") {
 				delete process.mainModule.moduleCache[filePath];
 			}
-			
+			*/
 			delete responderBase[fileKey];
 			
 			sys.puts(("[ responders ] ERROR Loading ." + 
@@ -116,12 +116,12 @@ var unload	= function(Foulinks, recurse) {
 					
 					delete this[fileKey];
 				}
-				
+				/*
 				// Delete responder cache
 				if (typeof process.mainModule.moduleCache[filePath] !== "undefined") {
 					delete process.mainModule.moduleCache[filePath];
 				}
-				
+				*/
 				delete this[fileKey];
 				
 				sys.puts(("[ responders ] removed: " + fileKey)[Configs.colors.responders]);

@@ -3,25 +3,41 @@ var path	= require("path");
 exports.Config = {
 	version:		"0.0.1",
 	
-	responderDir:		"responders",
+	inboundDestination:	"500 XML default",
+	gatewayName:		"Gateway",
+	
+	httpd:			{
+		port:			5780,
+		host:			"pbx.example.tld",
+		color:			"yellow"
+	},
+	
+	ldap:			{
+		uri:			"ldaps://ldap.example.tld/",
+		users:			"ou=people,dc=example,dc=tld?*?sub?",
+		sipPassword:	"AstAccountSecret",
+		vmPassword:		"AstAccountMailbox",
+		userKey:		"uidNumber",
+		fields:			["uidNumber", "uid", "sn", "givenName", "mobile", "AstAccountSecret", "AstAccountMailbox", "objectClass", "dn"]
+	},
 	
 	color:			"green",
 	
 	colors:			{
-		commands:	"red",
-		modules:	"green",
+		responders:	"red",
 		configs:	"magenta",
 		success:	"green",
 		failure:	"red"
 	},
 	
+	responderDir:		"responders",
+	
 	init:	function(self)
 	{
-		if (this.debug === true) {
-		}
-		/*
+		if (this.debug === true) {}
+		
 		if (("fields" in self.ldap) === true) {
 			self.ldap.users.replace(/(\?\*\?)/, self.ldap.fields.join(","));
-		}*/
+		}
 	}
 };

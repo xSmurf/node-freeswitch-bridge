@@ -1,4 +1,4 @@
-var FreeNodeHandler	= require("./libs/freenode").FreeNode,
+var FreeNodeHandler	= require("./handlers/freenode").FreeNode,
 	Configs			= require("./configs");
 
 // Instanciate our main object

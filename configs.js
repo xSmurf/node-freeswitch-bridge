@@ -26,12 +26,12 @@ var load	= function (debug) {
 			var fullPath	= __dirname + filePath.substr(1);
 			fileName		= filePath.replace(/(\.js)$/, "");
 			fileKey			= fileName.replace(/^(.*)\//g, "");
-			
+			/*
 			// Delete module cache
 			if (typeof process.mainModule.moduleCache[fullPath] !== "undefined") {
 				delete process.mainModule.moduleCache[fullPath];
 			}
-			
+			*/
 			var configFile	= require(fileName).Config;
 			
 			Object.keys(configFile).forEach(function (key) {

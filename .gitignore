@@ -9,3 +9,5 @@ build/*
 ._*
 
 *.*~
+lab-status.js
+provider-balance.js

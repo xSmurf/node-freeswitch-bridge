@@ -1,0 +1,7 @@
+exports.Config = {directory: {
+	dialString:		"{presence_id=${dialed_user}@${dialed_domain}}${sofia_contact(${dialed_user}@${dialed_domain})}",
+	vmEnabled:		true,
+	userContext:	"default",
+	userGroup:		"default",
+	baseExtension:	10000
+}};

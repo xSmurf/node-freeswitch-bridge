@@ -1,3 +1,9 @@
+/**
+* TODO: LDAP query cache for speed and to not hammer the ldap server for nothing 5min cache would be plenty
+* TODO: VM Change Password
+* TODO: Provider Balance
+**/
+
 var debug				= true;
 
 var	sys					= require("sys"),
@@ -5,21 +11,23 @@ var	sys					= require("sys"),
 	events				= require("events"),
 	colors				= require("colors"),
 	path				= require("path"),
-	hash				= require("../deps/node-hash/lib/hash"),
+	hash				= require("../modules/node-hash/lib/hash"),
 	// We load this separately because we might need some things before the configs are loaded
 	FreeNodeConfig		= require("../configs/freenode").Config,
 	Configs				= require("../configs"),
 	Responders			= require("../responders"),
-	LDAPClient			= require("../deps/node-ldapsearch/build/default/ldap.node");
-	
+	LDAPClient			= require("../modules/node-ldapsearch/build/default/ldap.node"),
+	httpServer			= require("./httpd").httpServer;
+
 var FreeNode	= function() {
 	var self		  		= this;
 	this.uptime				= (new Date().getTime());
 	this.loaders			= [];
 	this.ConfigsLoader		= null;
 	this.RespondersLoader	= null;
+	this.httpd				= null;
 	
-	process.title		= "FreeNode";
+	process.title			= "FreeNode";
 	
 	events.EventEmitter.call(this);
 	
@@ -136,7 +144,9 @@ FreeNode.prototype.reinit	= function(cbReturn) {
 };
 
 FreeNode.prototype.onInited	= function() {
+	this.httpServer	= new httpd().init();
 	
+	console.log(util.inspect(this));
 };
 
 /**
@@ -160,6 +170,8 @@ FreeNode.prototype.addDependencies	= function(reload) {
 	);
 	
 	if (reload === true) {
+		this.httpd.deinit();
+		
 		// We also want to wait for the MUC to bind
 		this.addDependency(
 			// Loader
@@ -179,6 +191,23 @@ FreeNode.prototype.addDependencies	= function(reload) {
 			Responders.load.apply(self, [self]);
 		}, "responders:loaded", this]
 	);
+	
+	
+	this.addDependency(
+		// Loader
+		[function() {
+			console.log(("Loading HTTP Server")[Configs.httpd.color]);
+			self.httpd	= new httpServer(self.Responders).init();
+			return self.httpd;
+		}, "httpd:binded"],
+		
+		// Failure
+		[function(error) {
+			sys.error(("Error binding HTTP Server")[Configs.colors.failure]);
+			process.exit(1);
+		}, "httpd:error"]
+	);
+	
 };
 
 /**
