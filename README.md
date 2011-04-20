@@ -4,9 +4,17 @@ This is a bridge for integrating LDAP users into FreeSwitch. Unlike realtime Ast
 
 ## Dependencies ##
 
+[node-ldapsearch](https://github.com/xSmurf/node-ldapsearch), [ltx](https://github.com/astro/ltx), [node-expat](https://github.com/astro/node-expat), colors.
+
 <pre>
 	npm install node-expat colors
 	git submodule init
 </pre>
 
+## TODOS ##
+
+* VM Change Password support (will require additional support from node-ldapsearch)
+* LDAP Query cache to avoid hammering the ldap server (FreeSwitch can request user information many times in a single dialplan)
+
 Every original work included is licenced under Creative Commons BY-SH-NC
+
